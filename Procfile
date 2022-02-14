@@ -1,1 +1,1 @@
-Worker: node nerbot.py
+Worker: python nerbot.py
