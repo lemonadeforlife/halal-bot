@@ -1,1 +1,1 @@
-Worker: python nerbot.py
+Bot: python nerbot.py
