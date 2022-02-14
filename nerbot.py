@@ -9,7 +9,7 @@ bot = lightbulb.BotApp(key, prefix=".")
 
 
 @bot.command
-@lightbulb.command('random_verse', aliases=["rq", "rv", 'verse', 'rq'], description="Random Quran Verses")
+@lightbulb.command('random_verse', aliases=["rq", "rv", 'verse', 'rq', 'rqv'], description="Random Quran Verses")
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def random_quran_verse(msg: lightbulb.Context) -> None:
     import random
