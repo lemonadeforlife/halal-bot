@@ -5,6 +5,26 @@ with open('key.txt', 'r') as f:
 
 bot = lightbulb.BotApp(key, prefix=".")
 
+# time
+
+
+@bot.command
+@lightbulb.command('time', aliases=["tm"], description="Tells you current time")
+@lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
+async def time(msg: lightbulb.Context) -> None:
+    from datetime import datetime
+    time = datetime.now().time().strftime("%I:%M %p")
+    await msg.respond(time)
+
+
+@bot.command
+@lightbulb.command('date', aliases=["dt"], description="Tells you current time")
+@lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
+async def date(msg: lightbulb.Context) -> None:
+    from datetime import datetime
+    time = datetime.now().date().strftime("%d-%m-%Y")
+    await msg.respond(time)
+
 # Random Quran Verse Generator
 
 
