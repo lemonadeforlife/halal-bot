@@ -286,22 +286,34 @@ Verse Number. **{verse}**"""
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def next_exam(msg: lightbulb.Context) -> None:
     from datetime import datetime
-    day = datetime.now().date().day
-    month = datetime.now().date().month
-    year = datetime.now().date().year
+    import pytz
+    day = datetime.now(pytz.timezone('Asia/Dhaka')
+                       ).date().day
+    month = datetime.now(pytz.timezone('Asia/Dhaka')
+                         ).date().month
+    year = datetime.now(pytz.timezone('Asia/Dhaka')
+                        ).date().year
 
     def current_time():
-        cyear = datetime.now().year
-        cmonth = datetime.now().date().month
-        cday = datetime.now().date().day
-        chour = datetime.now().time().hour
-        cmin = datetime.now().time().minute
+        cyear = datetime.now(pytz.timezone('Asia/Dhaka')
+                             ).year
+        cmonth = datetime.now(pytz.timezone('Asia/Dhaka')
+                              ).date().month
+        cday = datetime.now(pytz.timezone('Asia/Dhaka')
+                            ).date().day
+        chour = datetime.now(pytz.timezone('Asia/Dhaka')
+                             ).time().hour
+        cmin = datetime.now(pytz.timezone('Asia/Dhaka')
+                            ).time().minute
         return datetime(cyear, cmonth, cday, chour, cmin)
 
     def m_time(hour, min):
-        cyear = datetime.now().year
-        cmonth = datetime.now().date().month
-        cday = datetime.now().date().day
+        cyear = datetime.now(pytz.timezone('Asia/Dhaka')
+                             ).year
+        cmonth = datetime.now(pytz.timezone('Asia/Dhaka')
+                              ).date().month
+        cday = datetime.now(pytz.timezone('Asia/Dhaka')
+                            ).date().day
         return datetime(cyear, cmonth, cday, hour, min)
 
     def exam():

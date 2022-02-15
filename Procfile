@@ -1,1 +1,1 @@
-Bot: python nerbot.py
+Halal_Bot: python nerbot.py
