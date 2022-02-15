@@ -279,8 +279,6 @@ Verse Number. **{verse}**"""
 @lightbulb.command('next-exam', aliases=['ne', 'up'], description='Tells you about upcoming exam of ACC')
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def next_exam(msg: lightbulb.Context) -> None:
-    from datetime import datetime
-    import pytz
     day = datetime.now(pytz.timezone('Asia/Dhaka')
                        ).date().day
     month = datetime.now(pytz.timezone('Asia/Dhaka')
