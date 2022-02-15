@@ -319,15 +319,14 @@ async def next_exam(msg: lightbulb.Context) -> None:
             else:
                 return 'Chemistry'
         elif day == 16:
-            if current_time() >= m_time(9, 10):
-                return 'English'
-            else:
-                return 'Biology'
+            return '**English at 8:45AM**\n**Biology at 11:10AM**'
         elif day == 17:
-            if current_time() >= m_time(9, 10):
+            if m_time(9, 10) <= current_time() < m_time(11, 40):
+                return '**Biology at 11:10AM**'
+            elif m_time(11, 40) <= current_time():
                 return 'Higher Math'
             else:
-                return 'English'
+                return 'English at 8:45AM'
         elif 17 < day <= 20:
             if current_time() >= m_time(9, 10):
                 return None
