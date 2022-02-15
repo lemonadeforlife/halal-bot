@@ -1,4 +1,3 @@
-import hikari
 import lightbulb
 with open('key.txt', 'r') as f:
     key = f.read()
