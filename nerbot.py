@@ -1,4 +1,7 @@
 import lightbulb
+from datetime import datetime
+import random
+import pytz
 with open('key.txt', 'r') as f:
     key = f.read()
 
@@ -11,8 +14,6 @@ bot = lightbulb.BotApp(key, prefix=".")
 @lightbulb.command('time', aliases=["tm"], description="Tells you current time")
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def time(msg: lightbulb.Context) -> None:
-    from datetime import datetime
-    import pytz
     time = datetime.now(pytz.timezone('Asia/Dhaka')
                         ).time().strftime("%I:%M %p")
     await msg.respond(time)
@@ -22,8 +23,6 @@ async def time(msg: lightbulb.Context) -> None:
 @lightbulb.command('date', aliases=["dt"], description="Tells you current time")
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def date(msg: lightbulb.Context) -> None:
-    from datetime import datetime
-    import pytz
     time = datetime.now(pytz.timezone('Asia/Dhaka')
                         ).date().strftime("%d-%m-%Y")
     await msg.respond(time)
@@ -35,10 +34,6 @@ async def date(msg: lightbulb.Context) -> None:
 @lightbulb.command('random_verse', aliases=["rq", "rv", 'verse', 'rq', 'rqv'], description="Random Quran Verses")
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def random_quran_verse(msg: lightbulb.Context) -> None:
-    import random
-    import sys
-    import os
-
     chapters = {
         1: "Al-Fatihah (the Opening)",
         2: "Al-Baqarah (the Cow)",
