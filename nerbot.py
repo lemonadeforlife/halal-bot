@@ -13,7 +13,9 @@ bot = lightbulb.BotApp(key, prefix=".")
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def time(msg: lightbulb.Context) -> None:
     from datetime import datetime
-    time = datetime.now().time().strftime("%I:%M %p")
+    import pytz
+    time = datetime.now(pytz.timezone('Asia/Dhaka')
+                        ).time().strftime("%I:%M %p")
     await msg.respond(time)
 
 
@@ -22,7 +24,9 @@ async def time(msg: lightbulb.Context) -> None:
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def date(msg: lightbulb.Context) -> None:
     from datetime import datetime
-    time = datetime.now().date().strftime("%d-%m-%Y")
+    import pytz
+    time = datetime.now(pytz.timezone('Asia/Dhaka')
+                        ).date().strftime("%d-%m-%Y")
     await msg.respond(time)
 
 # Random Quran Verse Generator
