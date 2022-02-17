@@ -355,6 +355,18 @@ Also contact him on discord: `Lemonade#1325`
     await msg.respond(message)
 
 # ki kore
+sadique = ['যৌবনটা লারা দিয়া কচু রান্না করে।',
+           'বদনা নিয়ে ব্যস্ত',
+           'সাইমুনের সাথে ব্যস্ত আসে',
+           'লঞ্চে আসে একটা বিশেষ কাজ করার জন্য',
+           'ঘুমাইয়া আসে',
+           'Drama দেখতাসে',
+           'Movie দেখতাসে']
+
+rizon = ['মিরপুর ১৪ তে একটি শলাকায় আগুন ধরাচ্ছে',
+         'Oxford Dictionary মুখস্ত করতেছে',
+         'Harvard এর জন্য প্রস্তুতি নিচ্ছে',
+         "COX'S Bazar গেছে"]
 
 
 @bot.command
@@ -363,7 +375,9 @@ Also contact him on discord: `Lemonade#1325`
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def kikore(msg: lightbulb.Context) -> None:
     if msg.options.member.id == 763072156350283786 or msg.options.member.username == 'sadique':
-        await msg.respond(f'{msg.options.member.mention} যৌবনটা লারা দিয়া কচু রান্না করে।')
+        await msg.respond(f'{msg.options.member.mention} {random.choice(sadique)}')
+    elif msg.options.member.id == 721817563973156975 or msg.options.member.username == 'Rizon':
+        await msg.respond(f'{msg.options.member.mention} {random.choice(rizon)}')
     else:
         await msg.respond('জানি নিয়া।')
 bot.run()
