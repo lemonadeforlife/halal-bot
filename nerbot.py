@@ -3,6 +3,8 @@ from datetime import datetime
 import random
 import pytz
 import hikari
+from bs4 import BeautifulSoup
+import requests
 with open('key.txt', 'r') as f:
     key = f.read()
 
@@ -32,7 +34,7 @@ async def date(msg: lightbulb.Context) -> None:
 
 
 @bot.command
-@lightbulb.command('random_verse', aliases=["rq", "rv", 'verse', 'rq', 'rqv'], description="Random Quran Verses")
+@lightbulb.command('random_verse', aliases=["rq", "rv", 'verse', 'rq', 'rqv', 'random_quran_verse'], description="Random Quran Verses")
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def random_quran_verse(msg: lightbulb.Context) -> None:
     chapters = {
@@ -265,12 +267,21 @@ async def random_quran_verse(msg: lightbulb.Context) -> None:
         112: 4,
         113: 5,
         114: 6}
+    chapter_no = random.randrange(1, 115)
+    verse_no = random.randrange(1, verses[chapter_no]+1)
 
-    chapter = random.randrange(1, 115)
-    verse = random.randrange(1, verses[chapter]+1)
-    message = f"""Chapter Name: **{chapters[chapter]}**
-Chapter No. **{chapter}**
-Verse Number. **{verse}**"""
+    html_text = requests.get(f'https://quran.com/{chapter_no}/{verse_no}').text
+    site = BeautifulSoup(html_text, 'lxml')
+    verse_div = site.find('div', class_='verse__translations english')
+    verse_par = verse_div.find(
+        'p', class_='text text--grey text--medium text--regular translation').text
+    # final Output
+    verse = verse_par.strip()
+    message = f"""Chapter Name: {chapters[chapter_no]}
+Chapter No. {chapter_no}
+Verse Number. {verse_no}
+
+***{verse}***"""
     await msg.respond(message)
 
 # Upcoming ACC Exam
