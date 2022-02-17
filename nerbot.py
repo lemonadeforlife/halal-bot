@@ -368,6 +368,11 @@ rizon = ['মিরপুর ১৪ তে একটি শলাকায় আ�
          'Harvard এর জন্য প্রস্তুতি নিচ্ছে',
          "COX'S Bazar গেছে"]
 
+sarjil = ['পানু দেখে',
+          'ঘাস কাটে',
+          'শাড়ি পিন্দে',
+          'ঘুমায়']
+
 
 @bot.command
 @lightbulb.option('member', 'Greet member', hikari.User)
@@ -378,6 +383,10 @@ async def kikore(msg: lightbulb.Context) -> None:
         await msg.respond(f'{msg.options.member.mention} {random.choice(sadique)}')
     elif msg.options.member.id == 721817563973156975 or msg.options.member.username == 'Rizon':
         await msg.respond(f'{msg.options.member.mention} {random.choice(rizon)}')
+    elif msg.options.member.id == 779686900113080340 or msg.options.member.username == 'Sarjil':
+        await msg.respond(f'{msg.options.member.mention} {random.choice(sarjil)}')
+    elif msg.options.member.id == 763046913305346048 or msg.options.member.username == 'Seam':
+        await msg.respond(f'এই সব আউল-ফাউল পোলাপানের খবর আমি রাখি না।')
     else:
         await msg.respond('জানি নিয়া।')
 bot.run()
