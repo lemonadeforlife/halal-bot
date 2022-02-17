@@ -9,6 +9,12 @@ with open('key.txt', 'r') as f:
     key = f.read()
 
 bot = lightbulb.BotApp(key, prefix=".")
+list_guild = [875718851097165824, 779752554137518130]
+
+
+def check_pre_guild(context: lightbulb.Context) -> bool:
+    return context.guild_id in list_guild
+
 
 # time
 
@@ -386,8 +392,9 @@ sarjil = ['পানু দেখে',
 
 
 @bot.command
+@lightbulb.add_checks(lightbulb.Check(check_pre_guild))
 @lightbulb.option('member', 'Greet member', hikari.User)
-@lightbulb.command('kikore', 'What are you doing?')
+@lightbulb.command('kikore', 'What are you doing?', guilds=[779752554137518130])
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def kikore(msg: lightbulb.Context) -> None:
     if msg.options.member.id == 763072156350283786 or msg.options.member.username == 'sadique':
@@ -400,4 +407,6 @@ async def kikore(msg: lightbulb.Context) -> None:
         await msg.respond(f'এই সব আউল-ফাউল পোলাপানের খবর আমি রাখি না।')
     else:
         await msg.respond('জানি নিয়া।')
+
+
 bot.run()
