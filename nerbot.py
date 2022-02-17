@@ -363,7 +363,7 @@ Also contact him on discord: `Lemonade#1325`
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def kikore(msg: lightbulb.Context) -> None:
     if msg.options.member.id == 763072156350283786 or msg.options.member.username == 'sadique':
-        await msg.respond(f'{msg.member.mention}যৌবনটা লারা দিয়া কচু রান্না করে।')
+        await msg.respond(f'{msg.options.member.mention} যৌবনটা লারা দিয়া কচু রান্না করে।')
     else:
         await msg.respond('জানি নিয়া।')
 bot.run()
