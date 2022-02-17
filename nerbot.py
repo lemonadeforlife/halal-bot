@@ -2,6 +2,7 @@ import lightbulb
 from datetime import datetime
 import random
 import pytz
+import hikari
 with open('key.txt', 'r') as f:
     key = f.read()
 
@@ -352,4 +353,17 @@ Also contact him on discord: `Lemonade#1325`
 """
 
     await msg.respond(message)
+
+# ki kore
+
+
+@bot.command
+@lightbulb.option('member', 'Greet member', hikari.User)
+@lightbulb.command('kikore', 'What are you doing?')
+@lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
+async def kikore(msg: lightbulb.Context) -> None:
+    if msg.options.member.id == 763072156350283786 or msg.options.member.username == 'sadique':
+        await msg.respond(f'{msg.member.mention}যৌবনটা লারা দিয়া কচু রান্না করে।')
+    else:
+        await msg.respond('জানি নিয়া।')
 bot.run()
