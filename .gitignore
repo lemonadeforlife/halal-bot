@@ -1,10 +1,7 @@
 test.*
 *.txt
 .venv
-<<<<<<< HEAD
-=======
 __pycache__
 pycache
 plugin/__pycache__
 *.pyc
->>>>>>> cb5c02e (Added Embedded Feature)
