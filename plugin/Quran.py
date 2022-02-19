@@ -1,3 +1,4 @@
+import time
 from bs4 import BeautifulSoup
 import requests
 import random
@@ -240,6 +241,16 @@ class Quran:
         self.chapter_no = chapter_no
         self.verse_no = verse_no
 
+    def parse_verse(self, chapter, verse):
+        html_text = requests.get(
+            f'https://quran.com/{chapter}/{verse}').text
+        site = BeautifulSoup(html_text, 'lxml')
+        verse_div = site.find_all(
+            'div', class_='verse__translations english')[1]
+        verse_par = verse_div.find(
+            'p', class_='text text--grey text--medium text--regular translation').text
+        return verse_par.strip()
+
     def check_num(self):
         str_ptrn = re.compile(r"""[a-zA-Z_`~!@#$%^&*;:'"?/\.,+=/*]""")
         match_ptrn = str_ptrn.search(str(self.chapter_no))
@@ -255,51 +266,28 @@ class Quran:
                 else:
                     return 'Invalid chapter no'
 
-    def get_verse(self, op=False):
+    def get_verse(self):
         if self.check_num() == None:
             int(self.chapter_no)
-            int(self.verse_no)
-            html_text = requests.get(
-                f'https://quran.com/{self.chapter_no}/{self.verse_no}').text
-            site = BeautifulSoup(html_text, 'lxml')
-            verse_div = site.find_all(
-                'div', class_='verse__translations english')[1]
-            verse_par = verse_div.find(
-                'p', class_='text text--grey text--medium text--regular translation').text
-    # final Output
-            verse = verse_par.strip()
-            message = f"""Chapter Name: {self.chapters[int(self.chapter_no)]}
-    Chapter No. {self.chapter_no}
-    Verse Number. {self.verse_no}
-
-    ***{verse}***"""
-            if op == False:
-                return message
-            if op == True:
-                return verse
-        else:
-            return self.check_num()
-
-    def get_verse_all(self):
-        if self.check_num() == None:
-            if type(self.verse_no) == str and self.verse_no.find('-') != -1:
+            if self.verse_no.find('-') != -1:
                 min, max = self.verse_no.split('-')
-                if 1 <= int(min) <= self.verses[int(self.chapter_no)] and 1 <= int(max) <= self.verses[int(self.chapter_no)] and int(min) < int(max):
-                    verse = ''
-                    for x in range(int(min), int(max)+1):
-                        self.verse_no = x
-                        verse += self.get_verse(op=True)
-                    message = f"""Chapter Name: {self.chapters[int(self.chapter_no)]}
+                verse = ''
+                for x in range(int(min), int(max)+1):
+                    verse += self.parse_verse(self.chapter_no, x) + '\n'
+                message = f"""Chapter Name: {self.chapters[int(self.chapter_no)]}
 Chapter No. {self.chapter_no}
 Verse Number. {self.verse_no}
 
 ***{verse}***"""
-                    return message
-                else:
-                    return 'Invalid verse no'
+                return message
             else:
-                abs(int(self.verse_no))
-                return self.get_verse()
+                verse = self.parse_verse(self.chapter_no, int(self.verse_no))
+                message = f"""Chapter Name: {self.chapters[int(self.chapter_no)]}
+Chapter No. {self.chapter_no}
+Verse Number. {self.verse_no}
+
+***{verse}***"""
+                return message
         else:
             return self.check_num()
 

@@ -57,7 +57,7 @@ async def quran(ctx: lightbulb.Context) -> None:
     if len(Quran(chapter, verse).get_verse_all()) > 2000:
         await ctx.respond('Sorry character is more than 2000 character')
     else:
-        await ctx.respond(Quran(chapter, verse).get_verse_all())
+        await ctx.respond(Quran(chapter, verse).get_verse())
 # Upcoming ACC Exam
 
 
