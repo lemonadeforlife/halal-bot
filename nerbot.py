@@ -54,10 +54,7 @@ async def random_quran_verse(msg: lightbulb.Context) -> None:
 async def quran(ctx: lightbulb.Context) -> None:
     chapter = ctx.options.chapter
     verse = ctx.options.verse
-    if len(Quran(chapter, verse).get_verse()) > 2000:
-        await ctx.respond('Sorry character is more than 2000 character')
-    else:
-        await ctx.respond(Quran(chapter, verse).get_verse())
+    await ctx.respond(Quran(chapter, verse).get_verse())
 # Upcoming ACC Exam
 
 
