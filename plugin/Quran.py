@@ -1,8 +1,10 @@
+from multiprocessing import Value
 import time
 from bs4 import BeautifulSoup
 import requests
 import random
 import re
+import hikari
 
 
 class Quran:
@@ -274,20 +276,49 @@ class Quran:
                 verse = ''
                 for x in range(int(min), int(max)+1):
                     verse += self.parse_verse(self.chapter_no, x) + '\n'
-                message = f"""Chapter Name: {self.chapters[int(self.chapter_no)]}
-Chapter No. {self.chapter_no}
-Verse Number. {self.verse_no}
-
-***{verse}***"""
-                return message
+                embed = (
+                    hikari.Embed(
+                        title="The Holy Quran",
+                        color="00ff73"
+                    ).add_field(
+                        name="Chapter Name",
+                        value=str(self.chapters[int(self.chapter_no)]),
+                        inline=True
+                    ).add_field(
+                        name="Chapter Number",
+                        value=str(self.chapter_no)
+                    ).add_field(
+                        name="Verse Number",
+                        value=str(self.verse_no)
+                    ).add_field(
+                        name="Verse",
+                        value=verse
+                    )
+                )
+                return embed
             else:
                 verse = self.parse_verse(self.chapter_no, int(self.verse_no))
-                message = f"""Chapter Name: {self.chapters[int(self.chapter_no)]}
-Chapter No. {self.chapter_no}
-Verse Number. {self.verse_no}
-
-***{verse}***"""
-                return message
+                embed = (
+                    hikari.Embed(
+                        title="BOOK: The Holy Quran",
+                        description="The Quran, also romanized Qur'an or Koran, is the central religious text of Islam, believed by Muslims to be a revelation from God.",
+                        color="00ff73"
+                    ).add_field(
+                        name="Chapter Name:",
+                        value=str(self.chapters[int(self.chapter_no)]),
+                        inline=True
+                    ).add_field(
+                        name="Chapter Number:",
+                        value=str(self.chapter_no)
+                    ).add_field(
+                        name="Verse Number:",
+                        value=str(self.verse_no)
+                    ).add_field(
+                        name="Verse:",
+                        value=verse
+                    )
+                )
+                return embed
         else:
             return self.check_num()
 
