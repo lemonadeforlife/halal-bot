@@ -269,7 +269,7 @@ class Quran:
     def get_verse(self):
         if self.check_num() == None:
             int(self.chapter_no)
-            if self.verse_no.find('-') != -1:
+            if type(self.verse_no) != int and self.verse_no.find('-') != -1:
                 min, max = self.verse_no.split('-')
                 verse = ''
                 for x in range(int(min), int(max)+1):
