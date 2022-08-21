@@ -247,7 +247,7 @@ class Quran:
         html_text = requests.get(
             f'https://quran.com/{chapter}/{verse}').text
         site = BeautifulSoup(html_text, 'lxml')
-        verse_par = site.find(
+        verse_par = site.find_all(
             'div', class_='TranslationText_text__4atf8 TranslationText_ltr__146rZ').text
         return verse_par.strip()
 
