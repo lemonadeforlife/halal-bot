@@ -248,8 +248,8 @@ class Quran:
             f'https://quran.com/{chapter}/{verse}').text
         site = BeautifulSoup(html_text, 'lxml')
         verse_par = site.find(
-            'div', class_='TranslationText_text__4atf8 TranslationText_ltr__146rZ').text
-        return verse_par.strip()
+            'div', class_='TranslationText_text__4atf8 TranslationText_ltr__146rZ').text.encode('ascii', 'ignore')
+        return verse_par.strip().decode()
 
     def check_num(self):
         str_ptrn = re.compile(r"""[a-zA-Z_`~!@#$%^&*;:'"?/\.,+=/*]""")
