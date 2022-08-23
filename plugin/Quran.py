@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import time
-=======
->>>>>>> dev
 from bs4 import BeautifulSoup
 import requests
 import random
@@ -250,13 +246,8 @@ class Quran:
             f'https://quran.com/{chapter}/{verse}').text
         site = BeautifulSoup(html_text, 'lxml')
         verse_par = site.find(
-<<<<<<< HEAD
             'div', class_='TranslationText_text__4atf8 TranslationText_ltr__146rZ').text.encode('ascii', 'ignore')
         return verse_par.strip().decode()
-=======
-            'div', class_='TranslationText_text__4atf8 TranslationText_ltr__146rZ').text
-        return verse_par.strip()
->>>>>>> dev
 
     def check_num(self):
         str_ptrn = re.compile(r"""[a-zA-Z_`~!@#$%^&*;:'"?/\.,+=/*]""")
@@ -333,6 +324,3 @@ class Quran:
         chapter_no = random.randrange(1, 115)
         verse_no = random.randrange(1, Quran.verses[chapter_no]+1)
         return Quran(chapter_no, verse_no).get_verse()
-
-
-print(Quran(2, 282).get_verse())
