@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import time
+=======
+>>>>>>> dev
 from bs4 import BeautifulSoup
 import requests
 import random
@@ -247,23 +250,29 @@ class Quran:
             f'https://quran.com/{chapter}/{verse}').text
         site = BeautifulSoup(html_text, 'lxml')
         verse_par = site.find(
+<<<<<<< HEAD
             'div', class_='TranslationText_text__4atf8 TranslationText_ltr__146rZ').text.encode('ascii', 'ignore')
         return verse_par.strip().decode()
+=======
+            'div', class_='TranslationText_text__4atf8 TranslationText_ltr__146rZ').text
+        return verse_par.strip()
+>>>>>>> dev
 
     def check_num(self):
         str_ptrn = re.compile(r"""[a-zA-Z_`~!@#$%^&*;:'"?/\.,+=/*]""")
         match_ptrn = str_ptrn.search(str(self.chapter_no))
         if match_ptrn:
-            return 'invalid chapter no'
+            return 'Invalid chapter No.'
         else:
             v_ptrn = str_ptrn.search(str(self.verse_no))
             if v_ptrn:
-                return 'invalid verse no'
+                return 'Invalid verse No.'
             else:
                 if 1 <= int(self.chapter_no) <= 114:
-                    return None
+                    if 1 <= int(self.verse_no) <= self.verses[self.chapter_no]:
+                        return 'Invalid verse No.'
                 else:
-                    return 'Invalid chapter no'
+                    return 'Invalid chapter No.'
 
     def get_verse(self):
         if self.check_num() == None:
@@ -324,3 +333,6 @@ class Quran:
         chapter_no = random.randrange(1, 115)
         verse_no = random.randrange(1, Quran.verses[chapter_no]+1)
         return Quran(chapter_no, verse_no).get_verse()
+
+
+print(Quran(2, 282).get_verse())
