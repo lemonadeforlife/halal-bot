@@ -1,5 +1,3 @@
-from multiprocessing import Value
-import time
 from bs4 import BeautifulSoup
 import requests
 import random
@@ -255,16 +253,17 @@ class Quran:
         str_ptrn = re.compile(r"""[a-zA-Z_`~!@#$%^&*;:'"?/\.,+=/*]""")
         match_ptrn = str_ptrn.search(str(self.chapter_no))
         if match_ptrn:
-            return 'invalid chapter no'
+            return 'Invalid chapter No.'
         else:
             v_ptrn = str_ptrn.search(str(self.verse_no))
             if v_ptrn:
-                return 'invalid verse no'
+                return 'Invalid verse No.'
             else:
                 if 1 <= int(self.chapter_no) <= 114:
-                    return None
+                    if 1 <= int(self.verse_no) <= self.verses[self.chapter_no]:
+                        return 'Invalid verse No.'
                 else:
-                    return 'Invalid chapter no'
+                    return 'Invalid chapter No.'
 
     def get_verse(self):
         if self.check_num() == None:
@@ -325,3 +324,6 @@ class Quran:
         chapter_no = random.randrange(1, 115)
         verse_no = random.randrange(1, Quran.verses[chapter_no]+1)
         return Quran(chapter_no, verse_no).get_verse()
+
+
+print(Quran(2, 282).get_verse())
