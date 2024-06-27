@@ -4,6 +4,8 @@ import random
 import pytz
 import hikari
 from plugin.Quran import Quran
+
+# Insert your client token here
 with open('key.txt', 'r') as f:
     key = f.read()
 
